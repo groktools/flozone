@@ -1,0 +1,15 @@
+{
+  "name": "flozone",
+  "main": "./lib/flozone",
+  "version": "0.0.0",
+  "description": "Are you in the zone? This atom package helps you get there and stay there!",
+  "keywords": [
+  ],
+  "repository": "https://github.com/groktools/flozone",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

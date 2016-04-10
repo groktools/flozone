@@ -1,0 +1,46 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.flozone {
+  @button-margin-size: 2px;
+  @button-border-size: 1px;
+  background-color: @base-background-color;
+  border: 1px solid @base-border-color;
+  color: @text-color;
+  display: flex;
+  justify-content: flex-start;
+
+  button.tool-bar-btn {
+    background-color: @base-background-color;
+    background-image: inherit;
+    border-color: @base-background-color;
+    cursor: pointer;
+    flex: 0 0 auto;
+    margin: @button-margin-size;
+    padding: 0;
+
+    &:before {
+      display: inline;
+    }
+    &:focus,
+    &:hover {
+      border-color: @button-border-color;
+      outline: none;
+    }
+  }
+
+  span {
+    background-color: @base-background-color;
+    background-image: inherit;
+    border-color: @base-background-color;
+    margin: @button-margin-size;
+    padding: 10px;
+  }
+
+  atom-text-editor.taskname {
+    width:50%;
+  }
+}

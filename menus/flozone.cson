@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle flozone'
+      'command': 'flozone:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'flozone'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'flozone:toggle'
+        }
+      ]
+    ]
+  }
+]
