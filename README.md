@@ -11,15 +11,16 @@ As found by [Parnin](http://blog.ninlabs.com/2013/01/programmer-interrupted/):
 
 # Features
 `flozone` is a toggle-able toolbar that sits on top of your Atom window and allows you to start on a particular task by naming it. You continue to work on your task until you're done, registering it by hitting the stop button or typing a new task.
-![Screenshot](https://raw.githubusercontent.com/groktools/lilbro/master/flozone.png)
+
+![Screenshot](https://raw.githubusercontent.com/groktools/flozone/master/flozone.png)
 
 If/When you're interrupted in the middle of your task, you 'pause' the task by hitting the Pause button on the flow bar, and once the pesky interruption is done, you're reminded of your task because its name is front and center, and you can get back to the zone by pressing the Rewind button. This rewinds the last of your 15 actions in the IDE with enough delay for you to follow along, like so:
 
-![Screenshot](https://raw.githubusercontent.com/groktools/lilbro/master/flozone-1.png)
+![Screenshot](https://raw.githubusercontent.com/groktools/flozone/master/flozone-1.png)
 
 ... and then fast-forwards to your latest change by redoing all of the changes it just undid, like so:
 
-![Screenshot](https://raw.githubusercontent.com/groktools/lilbro/master/flozone-2.png)
+![Screenshot](https://raw.githubusercontent.com/groktools/flozone/master/flozone-2.png)
 
 Yes, you could do this manually, but this plugin makes the computer work for you!
 
