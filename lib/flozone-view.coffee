@@ -1,5 +1,10 @@
+{CompositeDisposable} = require 'atom'
+
 module.exports =
 class FlozoneView
+  maxRewind:null
+  subscriptions: null
+
   constructor: (serializedState) ->
     # Create root element
     @element = document.createElement('div')
@@ -11,13 +16,25 @@ class FlozoneView
     @rewindButton = @addButton 'WWID?' , @handleRewind, false
     @stopButton = @addButton 'Stop' , @handleStop, false
     @state = 'not-started'
-    console.log "initial state: #{@state}"
+    # console.log "initial state: #{@state}"
+
+    @maxRewind = atom.config.get 'flozone.maxRewind'
+    @speed = atom.config.get 'flozone.speed'
+
+    @subscriptions = new CompositeDisposable
+
+    @subscriptions.add atom.config.observe 'flozone.maxRewind', (newValue) =>
+      @maxRewind = newValue
+    # console.log "rw:#{maxRewind}, spd: #{@speed}"
+    @subscriptions.add atom.config.observe 'flozone.speed', (newValue)=>
+      @speed = newValue
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
 
   # Tear down any state and detach
   destroy: ->
+    @subscriptions.dispose()
     @element.remove()
 
   getElement: ->
@@ -74,7 +91,7 @@ class FlozoneView
     @rewindButton.value = "Undoing..."
     @undoCnt = 0
     #syntax here comes from: http://stackoverflow.com/a/23870034
-    @undoFn = setInterval(@doUndo.bind(@), 1000)
+    @undoFn = setInterval(@doUndo.bind(@), @speed)
     # Todo: this still doesnt work. Editor does not get focus back.
     # editor.focus()
 
@@ -91,11 +108,11 @@ class FlozoneView
 
   doUndo: ->
     # very useful for debugging 'this'
-    # console.log @
+    # console.log @maxRewind
     editor = atom.workspace.getActiveTextEditor()
-    if @undoCnt < 15
+    if @undoCnt < @maxRewind
       editor.undo()
-      # console.log "u: #{@undoCnt}"
+      console.log "u: #{@undoCnt}"
       @undoCnt++
     else
       # console.log "clearing undofn #{@undofn}"
@@ -103,12 +120,12 @@ class FlozoneView
       @undoCnt = 0
       @redoCnt = 0
       # console.log "setting up redofn: #{@undoCnt}, #{@redoCnt}"
-      @redoFn = setInterval(@doRedo.bind(@), 1000)
+      @redoFn = setInterval(@doRedo.bind(@), @speed)
 
   doRedo: ->
     @rewindButton.value = "Redoing..."
     editor = atom.workspace.getActiveTextEditor()
-    if @redoCnt < 15
+    if @redoCnt < @maxRewind
       editor.redo()
       # console.log "r: #{@redoCnt}"
       @redoCnt++

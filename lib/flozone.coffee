@@ -6,6 +6,18 @@ module.exports = Flozone =
   toolbar: null
   subscriptions: null
 
+  config:
+    maxRewind:
+      type:'integer'
+      default:15
+      description: "Maximum actions to rewind/replay"
+    speed:
+      type:'integer'
+      default: 1000
+      minimum:100
+      maximum:1000
+      description: "Speed of rewind/replay in milliseconds. Fast=100, Slow=1000. These are also the limits"
+
   activate: (state) ->
     @flozoneView = new FlozoneView(state.flozoneViewState)
     @toolbar = atom.workspace.addTopPanel(item: @flozoneView.getElement(), visible: true)
