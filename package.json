@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "description": "Are you in the zone? This atom package helps you get there and stay there!",
   "keywords": [
+    "flow","zone","groktools"
   ],
   "repository": "https://github.com/groktools/flozone",
   "license": "MIT",
