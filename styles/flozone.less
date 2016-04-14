@@ -3,6 +3,7 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
+@import "../icons/font-awesome/font-awesome";
 
 .flozone {
   @button-margin-size: 2px;
@@ -32,15 +33,17 @@
     }
   }
 
-  span {
+  span.label {
     background-color: @base-background-color;
     background-image: inherit;
     border-color: @base-background-color;
     margin: @button-margin-size;
-    padding: 10px;
+    padding: 5px;
+    font-size:100%;
   }
 
   atom-text-editor.taskname {
     width:50%;
+    height:inherit;
   }
 }

@@ -7,7 +7,7 @@ module.exports = Flozone =
   subscriptions: null
 
   config:
-    maxRewind:
+    maxReplay:
       type:'integer'
       default:15
       description: "Maximum actions to rewind/replay"
