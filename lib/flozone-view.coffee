@@ -13,11 +13,12 @@ class FlozoneView
       'Resume': 'play'
       'Replay': 'undo'
       'Stop': 'stop'
+    @icon = 'space-shuttle'
 
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('flozone')
-    @addSpan 'FloZone'
+    @addLogo()
     @addSpan 'I am...'
     @taskname = @addTextBox 'building awesomeness!'
     @startResumeButton = @addButton 'Start', @handleStartResume, false
@@ -48,7 +49,14 @@ class FlozoneView
   getElement: ->
     @element
 
-  addSpan: (txt)->
+  addLogo: ->
+    logo = document.createElement('i')
+    logo.classList.add('logo')
+    logo.classList.add('fa')
+    logo.classList.add('fa-' + @icon)
+    @element.appendChild(logo)
+
+  addSpan: (txt,icon)->
     span = document.createElement('span')
     span.classList.add('label')
     span.textContent = txt
