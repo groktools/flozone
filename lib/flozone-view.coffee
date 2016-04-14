@@ -116,6 +116,7 @@ class FlozoneView
       when 'started', 'paused','resumed'
         @disableButton @stopButton
         @switchIcons @startResumeButton, 'Pause','Start'
+        @taskname.getModel().setText('')
 
   handleTaskNameChange: ->
     # console.log 'handleTaskNameChange called'
