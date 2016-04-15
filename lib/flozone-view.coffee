@@ -83,6 +83,7 @@ class FlozoneView
     button.classList.add('tool-bar-btn')
     button.classList.add('fa')
     button.classList.add('fa-'+@cmdMap[cmd])
+    button.dataset.currentIcon = 'fa-'+@cmdMap[cmd]
     @disableButton button
     @element.appendChild(button)
     button
@@ -91,23 +92,24 @@ class FlozoneView
   # not started -> start --> pause --> resume -|--> stop
   #                 \----------|--------------------/
   handleStartResume: ->
-    console.log "start/resume called at state: #{@state}"
+    # console.log "start/resume called at state: #{@state}"
     switch @state
       when 'not-started'
         @state = 'started'
         @startResumeButton.textContent = "Pause"
-        @switchIcons @startResumeButton, 'Start', 'Pause'
+        @switchIcons @startResumeButton, 'Pause'
         @enableButton @stopButton
         # console.log @startResumeButton
       when 'started','resumed'
         @state = 'paused'
         @startResumeButton.textContent = "Resume"
-        @switchIcons @startResumeButton,'Pause','Resume'
+        @switchIcons @startResumeButton,'Resume'
       when 'paused'
         @state = 'resumed'
         @startResumeButton.textContent = "Pause"
-        @switchIcons @startResumeButton, 'Resume', 'Pause'
+        @switchIcons @startResumeButton,'Pause'
         @enableButton @replayButton
+    # console.log "start/resume called at state: #{@state}"
 
   handleReplay: ->
     # console.log(@)
@@ -120,17 +122,15 @@ class FlozoneView
     editor.focus()
 
   handleStop: ->
+    # console.log "stop called at state: #{@state}"
     switch @state
       when 'not-started'
         @enableButton @stopButton
-      when 'started','resumed'
+      when 'started','resumed','paused'
         @state = 'not-started'
         @disableButton @stopButton
-        @switchIcons @startResumeButton, 'Pause','Start'
-        @taskname.getModel().setText('')
-      when 'paused'
-        @disableButton @stopButton
-        @switchIcons @startResumeButton, 'Resume','Start'
+        @switchIcons @startResumeButton, 'Start'
+        @startResumeButton.textContent = 'Start'
         @taskname.getModel().setText('')
 
   handleTaskNameChange: ->
@@ -177,9 +177,12 @@ class FlozoneView
     button.classList.add 'enabled'
 
   disableButton: (button)->
-    button.classList.remove 'ensabled'
+    button.classList.remove 'enabled'
     button.classList.add 'disabled'
 
-  switchIcons: (button,from,to)->
-    button.classList.remove('fa-'+@cmdMap[from])
-    button.classList.add('fa-'+@cmdMap[from])
+  switchIcons: (button,to)->
+    # console.log "current icon: #{button.dataset.currentIcon}, #{to}"
+    button.classList.remove(button.dataset.currentIcon)
+    newIcon = 'fa-'+@cmdMap[to]
+    button.classList.add(newIcon)
+    button.dataset.currentIcon = newIcon
