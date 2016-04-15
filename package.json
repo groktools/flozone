@@ -1,7 +1,7 @@
 {
   "name": "flozone",
   "main": "./lib/flozone",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Are you in the zone? This atom package helps you get there and stay there!",
   "keywords": [
     "flow",
