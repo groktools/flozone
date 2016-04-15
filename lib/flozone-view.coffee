@@ -86,8 +86,10 @@ class FlozoneView
     @disableButton button
     @element.appendChild(button)
     button
-
-  # start --> pause --> resume --> stop
+  #                             /-------------_\
+  #                            V               |
+  # not started -> start --> pause --> resume -|--> stop
+  #                 \----------|--------------------/
   handleStartResume: ->
     console.log "start/resume called at state: #{@state}"
     switch @state
@@ -97,7 +99,7 @@ class FlozoneView
         @switchIcons @startResumeButton, 'Start', 'Pause'
         @enableButton @stopButton
         # console.log @startResumeButton
-      when 'started'
+      when 'started','resumed'
         @state = 'paused'
         @startResumeButton.textContent = "Resume"
         @switchIcons @startResumeButton,'Pause','Resume'
@@ -121,9 +123,14 @@ class FlozoneView
     switch @state
       when 'not-started'
         @enableButton @stopButton
-      when 'started', 'paused','resumed'
+      when 'started','resumed'
+        @state = 'not-started'
         @disableButton @stopButton
         @switchIcons @startResumeButton, 'Pause','Start'
+        @taskname.getModel().setText('')
+      when 'paused'
+        @disableButton @stopButton
+        @switchIcons @startResumeButton, 'Resume','Start'
         @taskname.getModel().setText('')
 
   handleTaskNameChange: ->
