@@ -26,7 +26,7 @@ Yes, you could do this manually, but this plugin makes the computer work for you
 
 # Install
 
-Download from the Atom packages site or install via apm - TBD.
+Download from the Atom packages site or install via apm.
 
 # Status
 4/4/2016: Basic functionality working. See Todos.md for next steps
